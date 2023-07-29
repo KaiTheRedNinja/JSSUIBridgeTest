@@ -30,7 +30,6 @@ struct BridgeElementView: View {
             Text(bridgeTextData.content)
         case .button(let bridgeButtonData):
             Button {
-                print("Clicked \(bridgeButtonData.action)")
                 buttonCoordinator.triggerFunction(named: bridgeButtonData.action)
             } label: {
                 BridgeElementView(element: bridgeButtonData.content)

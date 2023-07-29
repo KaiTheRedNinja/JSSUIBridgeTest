@@ -22,15 +22,8 @@ struct ContentView: View {
             TextField("File path", text: $filePath)
             TextField("View Class", text: $functionToCall)
             Button("Load") {
-                let fileURL = URL(filePath: filePath)
-
-                bridge.reset()
-                bridge.loadSourceFile(atUrl: fileURL)
-                _ = bridge.evaluateJavaScript(
-                """
-                let contentView = new \(functionToCall)()
-                """)
-                render()
+                loadFile()
+                registerSource()
             }
             .disabled(filePath == "" || functionToCall == "")
 
@@ -44,7 +37,6 @@ struct ContentView: View {
                 .padding(10)
                 .onChange(of: buttonCoordinator.triggeredFunction) { _, newValue in
                     guard let newValue else { return }
-                    print("Evaluating {\("contentView.\(newValue)()")}")
                     _ = bridge.evaluateJavaScript("contentView.\(newValue)()")
                     render()
                     buttonCoordinator.dismissTrigger()
@@ -53,6 +45,47 @@ struct ContentView: View {
             .padding(10)
         }
         .padding()
+    }
+
+    @State var source: DispatchSourceFileSystemObject?
+
+    func registerSource() {
+        let fileURL = URL(filePath: filePath)
+
+        guard let fileHandler = try? FileHandle(forReadingFrom: fileURL) else {
+            print("Could not get file descriptor")
+            return
+        }
+
+        let source = DispatchSource.makeFileSystemObjectSource(
+            fileDescriptor: fileHandler.fileDescriptor,
+            eventMask: .extend
+        )
+
+        source.setEventHandler {
+            loadFile()
+            print("LOADING")
+        }
+
+        source.setCancelHandler {
+            try? fileHandler.close()
+        }
+
+        source.resume()
+
+        self.source = source
+    }
+
+    func loadFile() {
+        let fileURL = URL(filePath: filePath)
+
+        bridge.reset()
+        bridge.loadSourceFile(atUrl: fileURL)
+        _ = bridge.evaluateJavaScript(
+                """
+                let contentView = new \(functionToCall)()
+                """)
+        render()
     }
 
     func render() {
@@ -65,7 +98,6 @@ struct ContentView: View {
         guard let json = try? JSONSerialization.jsonObject(with: json.data(using: .utf8)!) as? [String: Any] else { return }
         do {
             let tree = try bridgeElementFor(dict: json)
-            print(tree)
             rootElement = tree
         } catch {
             print("ERROR: \(error)")

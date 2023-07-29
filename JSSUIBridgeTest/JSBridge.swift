@@ -20,7 +20,6 @@ class JSBridge {
     }
 
     func callFunction(functionName: String) -> JSValue? {
-        print("Calling: \(functionName + "()")")
         let result = context.evaluateScript(functionName + "()")
         return result
     }

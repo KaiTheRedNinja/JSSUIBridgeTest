@@ -12,6 +12,8 @@
 		936C26862A75123100039327 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 936C26852A75123100039327 /* Assets.xcassets */; };
 		936C26892A75123100039327 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 936C26882A75123100039327 /* Preview Assets.xcassets */; };
 		936C26912A7512AA00039327 /* JSBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936C26902A7512AA00039327 /* JSBridge.swift */; };
+		936C26932A754F8B00039327 /* BridgeUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936C26922A754F8B00039327 /* BridgeUIElement.swift */; };
+		936C26952A754FA400039327 /* SwiftReactProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936C26942A754FA400039327 /* SwiftReactProcessing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		936C26882A75123100039327 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		936C268A2A75123100039327 /* JSSUIBridgeTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JSSUIBridgeTest.entitlements; sourceTree = "<group>"; };
 		936C26902A7512AA00039327 /* JSBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSBridge.swift; sourceTree = "<group>"; };
+		936C26922A754F8B00039327 /* BridgeUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeUIElement.swift; sourceTree = "<group>"; };
+		936C26942A754FA400039327 /* SwiftReactProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftReactProcessing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 				936C26812A75122E00039327 /* JSSUIBridgeTestApp.swift */,
 				936C26832A75122E00039327 /* ContentView.swift */,
 				936C26902A7512AA00039327 /* JSBridge.swift */,
+				936C26922A754F8B00039327 /* BridgeUIElement.swift */,
+				936C26942A754FA400039327 /* SwiftReactProcessing.swift */,
 				936C26852A75123100039327 /* Assets.xcassets */,
 				936C268A2A75123100039327 /* JSSUIBridgeTest.entitlements */,
 				936C26872A75123100039327 /* Preview Content */,
@@ -142,7 +148,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				936C26952A754FA400039327 /* SwiftReactProcessing.swift in Sources */,
 				936C26842A75122E00039327 /* ContentView.swift in Sources */,
+				936C26932A754F8B00039327 /* BridgeUIElement.swift in Sources */,
 				936C26912A7512AA00039327 /* JSBridge.swift in Sources */,
 				936C26822A75122E00039327 /* JSSUIBridgeTestApp.swift in Sources */,
 			);

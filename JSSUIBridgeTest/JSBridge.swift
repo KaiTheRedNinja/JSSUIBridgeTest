@@ -36,9 +36,7 @@ class JSBridge {
     }
 
     func loadSourceFile(atUrl url: URL) {
-        print("Loading yay \(url.absoluteString)")
         guard let stringFromUrl = try? String(contentsOf: url) else {return}
-        print("Loading: \n\(stringFromUrl)")
         context.evaluateScript(stringFromUrl)
     }
 

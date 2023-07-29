@@ -11,6 +11,8 @@ import SwiftUI
 struct BridgeElementView: View {
     var element: BridgeUIElement
 
+    @EnvironmentObject var buttonCoordinator: ButtonCoordinator
+
     var body: some View {
         switch element {
         case .stack(let bridgeStackData):
@@ -29,6 +31,7 @@ struct BridgeElementView: View {
         case .button(let bridgeButtonData):
             Button {
                 print("Clicked \(bridgeButtonData.action)")
+                buttonCoordinator.triggerFunction(named: bridgeButtonData.action)
             } label: {
                 BridgeElementView(element: bridgeButtonData.content)
             }

@@ -42,10 +42,12 @@ struct ContentView: View {
                     }
                 }
                 .padding(10)
-                .onChange(of: buttonCoordinator.triggeredFunction) { newValue in
+                .onChange(of: buttonCoordinator.triggeredFunction) { _, newValue in
                     guard let newValue else { return }
-                    bridge.evaluateJavaScript("contentView.\(newValue)()")
+                    print("Evaluating {\("contentView.\(newValue)()")}")
+                    _ = bridge.evaluateJavaScript("contentView.\(newValue)()")
                     render()
+                    buttonCoordinator.dismissTrigger()
                 }
             }
             .padding(10)

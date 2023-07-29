@@ -63,3 +63,27 @@ class JSBridge {
         return string
     }
 }
+
+extension JSBridge {
+    enum Permission {
+        case username
+    }
+
+    func loadPermission(permission: Permission) {
+        switch permission {
+        case .username:
+            setObject(object: SwiftBridge.self, withName: "SwiftBridge")
+            _ = evaluateJavaScript("const getUserName = SwiftBridge.getUserName")
+        }
+    }
+}
+
+@objc protocol SwiftBridgeProtocol: JSExport {
+    static func getUserName() -> String
+}
+
+class SwiftBridge: NSObject, SwiftBridgeProtocol {
+    class func getUserName() -> String {
+        return UserDefaults.standard.string(forKey: "username") ?? ""
+    }
+}

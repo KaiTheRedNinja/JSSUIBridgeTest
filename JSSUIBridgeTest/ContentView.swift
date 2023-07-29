@@ -11,6 +11,7 @@ struct ContentView: View {
     @AppStorage("filePath") var filePath: String = ""
     @AppStorage("functionToCall") var functionToCall: String = ""
     @AppStorage("parameters") var parameters: String = ""
+    @AppStorage("username") var username: String = ""
     @State var result: String = ""
 
     @State var bridge = JSBridge()
@@ -19,12 +20,14 @@ struct ContentView: View {
         VStack {
             TextField("File path", text: $filePath)
             TextField("Function", text: $functionToCall)
+            TextField("Username", text: $username)
             TextField("Parameters", text: $parameters)
             Button("GO") {
                 let fileURL = URL(filePath: filePath)
 
                 bridge.reset()
                 bridge.loadSourceFile(atUrl: fileURL)
+                bridge.loadPermission(permission: .username)
                 if let result = bridge.callFunction(functionName: functionToCall, withData: parameters), let strResult = result.toString() {
                     print(strResult)
                     self.result = strResult

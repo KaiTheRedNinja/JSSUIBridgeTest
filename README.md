@@ -1,6 +1,9 @@
 # JSSUIBridgeTest
 A test for calling JavaScript to build UI in Swift
 
+## Demo
+https://github.com/KaiTheRedNinja/JSSUIBridgeTest/assets/88234730/f890eb78-79f3-48d5-997c-a50c5c42758e
+
 ## Usage Instructions
 1. Create a JavaScript file in your Downloads folder. I used this:
 ```js
